@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model CharacterViewModel[]
+@{
+    ViewData["Title"] = "Welcome to the game";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character Details</title>
+</head>
+<body>
+<h1>Character Details</h1>
+<form method="post" action="/Home/HandleButtonClick">
+    
+    @foreach (var character in Model)
+    {
+        <button name="selectedCharacter" value="@character.Views">@character.Name</button>
+    }
+</form>
+
+  
+</body>
+</html>

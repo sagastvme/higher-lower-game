@@ -15,7 +15,22 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        CharacterViewModel[] array = new CharacterViewModel[]
+        {
+            new CharacterViewModel(2, "Edu", 40),
+            new CharacterViewModel(3, "Alice", 25)
+        };
+        return View(array);
+    }
+    [HttpPost]
+    public IActionResult HandleButtonClick(int selectedCharacter)
+    {
+        // Here, you can process the data received from the form submission.
+        // 'selectedCharacter' will contain the 'Views' value of the selected character.
+        // Perform the necessary logic based on the selected character.
+
+        // For demonstration purposes, we'll just return a simple message.
+        return Content($"You selected a character with {selectedCharacter} views.");
     }
 
     public IActionResult Privacy()

@@ -16,12 +16,6 @@ public class CharacterCollection
     public List<Character> FindAllCharacters()
     {
         List<Character> list = Characters.Find(p => true).ToList();
-      
-
-        foreach (Character charac in list) // Renamed 'character' to 'charac'
-        {
-            Console.WriteLine($"Character: {charac.Id} - Character Name: {charac.Name}, Character Image: {charac.Image}");
-        }
         return list;
     }
 
@@ -29,15 +23,18 @@ public class CharacterCollection
     {
         var filter = Builders<Character>.Filter.Eq(c => c.Id, id);
         var foundCharacter = Characters.Find(filter).FirstOrDefault();
-        if (foundCharacter != null)
+
+        // Check if the character was found or not
+        if (foundCharacter == null)
         {
-            Console.WriteLine($"Found Character: {foundCharacter.Id} - Character Name: {foundCharacter.Name}");
-        }
-        else
-        {
-            Console.WriteLine("Character not found.");
+            // You can either return null or throw an exception, depending on your use case.
+            // Returning null is more appropriate if not finding a character is a valid scenario.
+            return null;
+            // Alternatively, you can throw an exception if not finding a character is an exceptional scenario.
+            // throw new ArgumentException("Character not found for the given ID.");
         }
 
         return foundCharacter;
     }
+
 }
